@@ -1,5 +1,4 @@
-#import math as m
-
+# main function
 def total_investment_value(rate, principle, time, salary):
     interest = 0
     for i in range(time):
