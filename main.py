@@ -13,7 +13,7 @@ account for
 > variable yearly contributions
 
 Question to answer:
-> how long can one live for without working in the middle of their life?
+> For any point in the middle of my life, how long could I go without employment before I had to continue working again, without sacrificing the ability of myself and my family to retire with and meet our long-term financial goals?
 > how long retirement last with/without social security?
 
 '''
