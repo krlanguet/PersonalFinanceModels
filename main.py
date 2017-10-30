@@ -22,6 +22,7 @@ Question to answer:
 # imports --------------------------------------------------------
 import numpy as np
 from matplotlib import pyplot as plt
+import pandas as pd
 
 
 ### Defining Functions ----------------------------------------------
@@ -39,6 +40,19 @@ net_years = 10
 years_array = range(1,net_years+1)
 initial_value = 2000 # current net value
 current_age = 19
+
+## Inflation
+# use pandas to read data from
+inflation = pd.read_html('http://www.inflation.eu/inflation-rates/united-states/historic-inflation/cpi-inflation-united-states.aspx',match='CPI United States',header=0)
+inflation = inflation[2]
+df1 = inflation[['annual inflation (dec vs. dec)','inflation']]
+df2 = inflation[['annual inflation (dec vs. dec).1','inflation.1']]
+df2.columns = ['annual inflation (dec vs. dec)','inflation']
+
+inflation = pd.concat([df1,df2])
+inflation = inflation['inflation']
+#inflation = inflation[-1:-1:1]
+print(inflation)
 
 
 # 5th year masters --------------------------------------------------------
@@ -76,14 +90,14 @@ print('Worth at', net_years+current_age, ' years with Masters:', '${:,.2f}'.form
 plt.figure(1)
 plt.plot(years_array, amount_masters)
 plt.plot(years_array, amount_phd)
-plt.xlabel('Time (years)')
+plt.xlabel('Years of Work')
 plt.ylabel('Net Worth (Dollars)')
 plt.title('Net Worth')
 plt.legend(['Masters','Phd'])
 
 plt.figure(2)
 plt.plot(years_array, amount_masters - amount_phd)
-plt.xlabel('Time (years)')
+plt.xlabel('Years of Work')
 plt.ylabel('Difference in net worth')
 plt.grid(True)
 plt.title('Masters worth minus Ph.D worth')
