@@ -1,16 +1,16 @@
-# main function
-def total_investment_value(rate, principle, time, salary):
-    interest = 0
+# Main file to run all personal finance functions
+
+def total_investment_value(rate=0.04, principle=10000, time=10, contribution=1000):
     for i in range(time):
         interest =  principle*rate
-        principle += interest + salary
+        principle += interest + contribution
     return principle
 
-
+# input parameters for functions
 rate = 0.04 # yearly return rate
-salary = 68000 # what one makes each year
+contribution = 68000 # what one makes each year
 principle = 68000 # initial investment
 time = 13 # years
 
-new_amount = total_investment_value(rate, principle, time, salary)
-print(new_amount)
+new_amount = total_investment_value(rate, principle, time, contribution)
+print('amount of money returned is', new_amount)
