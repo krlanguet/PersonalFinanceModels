@@ -40,7 +40,6 @@ net_years = 20
 years_array = np.arange(current_age+1, current_age+net_years+1)
 initial_value = 2000 # current net value
 
-
 ''' Salary Sources
 Salary data from BLS for 2016 https://www.bls.gov/ooh/computer-and-information-technology/home.htm
 B.S. -> $95,000 for relevant careers

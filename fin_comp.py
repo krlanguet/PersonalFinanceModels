@@ -56,6 +56,7 @@ def contribution_over_time(contribution_levels, years_spent):
                 
     return contribution
 
+# Calculates the income tax level for a given salary or an array of salaries
 def federal_income_tax(salary):
     '''
     Uses data from
@@ -65,7 +66,47 @@ def federal_income_tax(salary):
     '''
     # uses a series of if statements to determine the corret tax bracket,
     # then determines how much tax must be paid based on that rate
-    pass # temporary place holder
+
+    # determines if salary is a scaler or a vector
+    if len(salary)>1:
+
+        # creates an array of the tax for every salary passed
+        tax = np.zeros(len(salary))
+
+        # determines the federal tax for level of salary
+        for i in range(len(salary)):
+            if salary[i] < 18650:
+                tax[i] = salary[i]*0.1
+            elif salary[i] >= 18650 and salary[i] < 75900:
+                tax[i] = 1865 + 0.15*(salary[i]-18650)
+            elif salary[i] >= 75900 and salary[i] < 153100:
+                tax[i] = 10452.5 + 0.25*(salary[i]-75900)
+            elif salary[i] >= 153100 and salary[i] < 233350:
+                tax[i]= 29752.5 + 0.28*(salary[i]-153100)
+            elif salary[i] >= 233350 and salary[i] < 416700:
+                tax[i] = 52222.5 + 0.3*(salary[i]-233350)
+            elif salary[i] >= 416700 and salary[i] < 470700:
+                tax[i] = 112728 + 0.35*(salary[i]-416700)
+            elif salary[i] >= 470700:
+                tax[i] = 131628 + 0.396*(salary[i]-470700)
+        return tax
+    else: # Scalar version of salary
+        if salary < 18650:
+            return salary*0.1
+        elif salary >= 18650 and salary < 75900:
+            return 1865 + 0.15*(salary-18650)
+        elif salary >= 75900 and salary < 153100:
+            return 10452.5 + 0.25*(salary-75900)
+        elif salary >= 153100 and salary < 233350:
+            return 29752.5 + 0.28*(salary-153100)
+        elif salary >= 233350 and salary < 416700:
+            return 52222.5 + 0.3*(salary-233350)
+        elif salary >= 416700 and salary < 470700:
+            return 112728 + 0.35*(salary-416700)
+        elif salary >= 470700:
+            return 131628 + 0.396*(salary-470700)
+        
+
 
     
     
