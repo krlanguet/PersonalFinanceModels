@@ -49,11 +49,46 @@ def contribution_over_time(contribution_levels, years_spent):
     
     # adds a zero to the beginning of program_years for ease of for loop
     years_spent = np.insert(years_spent,0,0)
-    print(years_spent)
 
     # assigns contribution values to their correstponding years
     for i in range(len(contribution_levels)):
         contribution[sum(years_spent[:i+1]):sum(years_spent[:i+2])] = contribution_levels[i]
                 
     return contribution
+
+def federal_income_tax(salary):
+    '''
+    Uses data from
+    https://www.irs.gov/pub/irs-drop/rp-16-55.pdf
+    level of taxation per level of income
+    to calculate the amount of tax paid     
+    '''
+    # uses a series of if statements to determine the corret tax bracket,
+    # then determines how much tax must be paid based on that rate
+    pass # temporary place holder
+
+    
+    
+        
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
