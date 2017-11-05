@@ -24,15 +24,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 import pandas as pd
 
+# custom files
+import fin_comp as fc
+
 
 ### Defining Functions ----------------------------------------------
 
-## Main Function 
-def total_investment_value(rate, amount, time, contribution):
-    for i in range(1, time):
-        interest =  amount[i-1]*rate[i-1]
-        amount[i] = amount[i-1] + interest + contribution[i-1] 
-    return amount
 
 
 ## Global Values -------------------------------------------------------
@@ -40,19 +37,6 @@ net_years = 10
 years_array = range(1,net_years+1)
 initial_value = 2000 # current net value
 current_age = 19
-
-## Inflation
-# use pandas to read data from
-inflation = pd.read_html('http://www.inflation.eu/inflation-rates/united-states/historic-inflation/cpi-inflation-united-states.aspx',match='CPI United States',header=0)
-inflation = inflation[2]
-df1 = inflation[['annual inflation (dec vs. dec)','inflation']]
-df2 = inflation[['annual inflation (dec vs. dec).1','inflation.1']]
-df2.columns = ['annual inflation (dec vs. dec)','inflation']
-
-inflation = pd.concat([df1,df2])
-inflation = inflation['inflation']
-#inflation = inflation[-1:-1:1]
-print(inflation)
 
 
 # 5th year masters --------------------------------------------------------
@@ -65,6 +49,7 @@ contribution_masters[3] = 500 # masters year
 contribution_masters[4:] = 46400 # take home each year = salary * .72 (tax) - 40,000 (living)
 rate_masters[4:-1] = 0.04 # return on investments
 
+#6 year masters
 
 # PhD program -------------------------------------------------------------------
 amount_phd = np.zeros(net_years)
