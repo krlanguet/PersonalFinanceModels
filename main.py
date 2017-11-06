@@ -2,10 +2,11 @@
 TO DO still:
 
 techincal
-> why is there a dip at 5 years?
+> 
 
 account for
 > taxes on net worth
+> possible debt from masters program
 > yearly expenses
 > add rest of salary to net worth per year
 > changing interest rates and salary changes
