@@ -31,9 +31,6 @@ style.use('bmh')
 import fin_comp as fc
 
 
-### Defining Functions ----------------------------------------------
-
-
 ## Global Values -------------------------------------------------------
 current_age = 19
 net_years = 20
@@ -51,43 +48,59 @@ This is will underestimate salary data
 '''
 
 # B.S. in Comp Sci -----------------------------------------------------------
-# contribution_levels_b = np.array([500,])
+salaries_b = np.array([500, 95000])
+living_expenses_b = np.array([0, 40000])
+additional_expenses_b = np.array([0, 0])
+eras_b = np.array([3, net_years-3])
+
+contribution_b = fc.contribution_over_time(salaries_b, living_expenses_b, additional_expenses_b, eras_b) # generates the contribution levels
+rate_b = np.zeros(net_years) # preallocation
+rate_b[4:] = 0.04 # return on investments
 
 # 5th year masters --------------------------------------------------------
-contribution_levels_m = np.array([500, 500, 46400]) # take home each year = salary * .72 (tax) - 40,000 (living)
-eras_masters = np.array([3, 1, net_years-4])
-contribution_masters = fc.contribution_over_time(contribution_levels_m, eras_masters) # generates the contribution levels
-rate_masters = np.zeros(net_years) # preallocation
-rate_masters[4:] = 0.04 # return on investments
+salaries_m = np.array([500, 500, 110000])
+living_expenses_m = np.array([0, 0, 40000])
+additional_expenses_m = np.array([0, 0, 0])
+eras_m = np.array([3, 1, net_years-4])
+
+contribution_m = fc.contribution_over_time(salaries_m, living_expenses_m, additional_expenses_m, eras_m)
+rate_m = np.zeros(net_years)
+rate_m[4:] = 0.04
 
 #6 year masters ???
 
 
 # PhD program -------------------------------------------------------------------
-contribution_levels_phd = np.array([500, 5000, 68000])# take home each year = salary * .72 (tax) - 40,000 (living)
+salaries_phd = np.array([500, 5000, 120000]) 
+living_expenses_phd = np.array([0, 0, 40000])
+additional_expenses_phd = np.array([0, 0, 0])
 eras_phd = np.array([3, 5, net_years-8])
-contribution_phd = fc.contribution_over_time(contribution_levels_phd, eras_phd)
+
+contribution_phd = fc.contribution_over_time(salaries_phd, living_expenses_phd, additional_expenses_phd, eras_phd)
 rate_phd = np.zeros(net_years) # preallocation
 rate_phd[3:] = 0.04 # return on investments
 
 
 # Function calls ---------------------------------------------------------------------
-amount_masters = fc.total_investment_value(rate_masters, initial_value, net_years, contribution_masters)
+amount_bachelors = fc.total_investment_value(rate_b, initial_value, net_years, contribution_b)
+amount_masters = fc.total_investment_value(rate_m, initial_value, net_years, contribution_m)
 amount_phd = fc.total_investment_value(rate_phd, initial_value, net_years, contribution_phd)
 
 # printing data to screen, net worth at last time
+print('Worth at', net_years+current_age, ' years with Bachelors:', '${:,.2f}'.format(amount_bachelors[-1]))
 print('Worth at', net_years+current_age, ' years with PhD:', '${:,.2f}'.format(amount_phd[-1]))
 print('Worth at', net_years+current_age, ' years with Masters:', '${:,.2f}'.format(amount_masters[-1]))
 
 
 # graphing data ----------------------------------------------------------------------------
 plt.figure(1)
+plt.plot(years_array, amount_bachelors,color='g')
 plt.plot(years_array, amount_masters, color='k')
 plt.plot(years_array, amount_phd,color='r')
-plt.xlabel('Years of Work')
+plt.xlabel('Age')
 plt.ylabel('Net Worth (Dollars)')
 plt.title('Net Worth')
-plt.legend(['Masters','Phd'])
+plt.legend(['Bachelors','Masters','Phd'])
 
 plt.figure(2)
 plt.plot(years_array, amount_masters - amount_phd, color='k')

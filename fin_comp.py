@@ -35,27 +35,6 @@ def total_investment_value(rate, amount, time, contribution, over_time=True):
         return amount[-1]
 
 
-# Generates investment contribution data
-def contribution_over_time(contribution_levels, years_spent):
-    # CONTRIBUTION_LEVELS is a numpy array of the dollar amounts contributed
-    #   to an account for every era in ones life. 
-    # YEARS_SPENT is a numpy array of the years spent at each point in ones life
-    # Ex: YEAR_SPENT = np.array([4, 5, 10]) 4 years in college, 5 years in PhD., and 10 years working
-    #   the corresponding CONTRIBUTION_LEVELS would be np.array([100, 500, 20000])
-    #   meaning 100 dollars contributed while in college, 500 dollars contribtued while in PhD.
-    
-    # creates the returned array that is the contribution amount for every year 
-    contribution = np.zeros(sum(years_spent))
-    
-    # adds a zero to the beginning of program_years for ease of for loop
-    years_spent = np.insert(years_spent,0,0)
-
-    # assigns contribution values to their correstponding years
-    for i in range(len(contribution_levels)):
-        contribution[sum(years_spent[:i+1]):sum(years_spent[:i+2])] = contribution_levels[i]
-                
-    return contribution
-
 # Calculates the income tax level for a given salary or an array of salaries
 def federal_income_tax(salary):
     '''
@@ -68,7 +47,7 @@ def federal_income_tax(salary):
     # then determines how much tax must be paid based on that rate
 
     # determines if salary is a scaler or a vector
-    if len(salary)>1:
+    if type(salary) == "numpy.ndarra":
 
         # creates an array of the tax for every salary passed
         tax = np.zeros(len(salary))
@@ -90,6 +69,7 @@ def federal_income_tax(salary):
             elif salary[i] >= 470700:
                 tax[i] = 131628 + 0.396*(salary[i]-470700)
         return tax
+    
     else: # Scalar version of salary
         if salary < 18650:
             return salary*0.1
@@ -107,14 +87,37 @@ def federal_income_tax(salary):
             return 131628 + 0.396*(salary-470700)
         
 
+# Generates investment contribution data
+def contribution_over_time(salary_levels, living_expense_levels, additional_expense_levels, years_spent):
+    # SALARY_LEVELS is a numpy array of the salaries estimated for each era of life, in dollars.
+    # LIVING_EXPENSE_LEVELS is a numpy array of estimated living expenses for each era.
+    # ADDITIONAL_EXPENSE_LEVELS is a numpy array of estimated additional expenses for each era.
+    # YEARS_SPENT is a numpy array of the years spent at each point in ones life
+    # Ex: YEAR_SPENT = np.array([4, 5, 10]) 4 years in college, 5 years in PhD., and 10 years working
+    #   the corresponding CONTRIBUTION_LEVELS would be np.array([100, 500, 20000])
+    #   meaning 100 dollars contributed while in college, 500 dollars contribtued while in PhD.
+    
+    # Ensures consistent number of eras
+    n_eras = years_spent.size
+    if (salary_levels.size != n_eras) or (living_expense_levels.size != n_eras) or (additional_expense_levels.size != n_eras):
+       print("Number of eras is inconsistent. Please enter arrays of the same size")
+       return
 
+    # creates the returned array that is the contribution amount for every year 
+    contribution = np.zeros(sum(years_spent))
     
-    
-        
-    
+    # adds a zero to the beginning of program_years for ease of for loop
+    years_spent = np.insert(years_spent,0,0)
 
-    
-
+    # assigns contribution values to their correstponding years
+    for i in range(n_eras):
+        amount = salary_levels[i]               # Salary
+        amount -= federal_income_tax(amount)    # After taxes
+        amount -= living_expense_levels[i]      # Factor for living expenses
+        amount -= additional_expense_levels[i]  # Factor for other expenses
+        contribution[sum(years_spent[:i+1]):sum(years_spent[:i+2])] = amount
+                
+    return contribution
 
 
 
