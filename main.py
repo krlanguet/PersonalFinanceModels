@@ -13,6 +13,9 @@ account for:
 > changing inflation
 > variable yearly contributions
 
+Tests to run:
+> Model what would happen during different macroeconomic environments
+
 Question to answer:
 > For any point in the middle of my life, how long could I go without
     employment before I had to continue working again, without sacrificing

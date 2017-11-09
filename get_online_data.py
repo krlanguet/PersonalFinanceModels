@@ -47,6 +47,7 @@ def inflation_data(data_set='FRED/FPCPITOTLZGUSA', start_date='1992-1-1',
     # end of function
     return inflation   
 
+# testing function
 inflation = inflation_data()
 print(inflation)
     
