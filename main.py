@@ -1,10 +1,10 @@
 '''
 TO DO still:
 
-techincal
-> 
+techincal:
 
-account for
+
+account for:
 > taxes on net worth
 > possible debt from masters program
 > yearly expenses
@@ -37,6 +37,7 @@ current_age = 19
 net_years = 20
 years_array = np.arange(current_age+1, current_age+net_years+1)
 initial_value = 2000 # current net value
+return_rate = 0.04 # return on investments
 
 ''' Salary Sources
 Salary data from BLS for 2016 https://www.bls.gov/ooh/computer-and-information-technology/home.htm
@@ -56,7 +57,7 @@ eras_b = np.array([3, net_years-3])
 
 contribution_b = fc.contribution_over_time(salaries_b, living_expenses_b, additional_expenses_b, eras_b) # generates the contribution levels
 rate_b = np.zeros(net_years) # preallocation
-rate_b[4:] = 0.04 # return on investments
+rate_b[4:] = return_rate # return on investments
 
 # 5th year masters --------------------------------------------------------
 salaries_m = np.array([500, 500, 110000])
@@ -66,7 +67,7 @@ eras_m = np.array([3, 1, net_years-4])
 
 contribution_m = fc.contribution_over_time(salaries_m, living_expenses_m, additional_expenses_m, eras_m)
 rate_m = np.zeros(net_years)
-rate_m[4:] = 0.04
+rate_m[4:] = return_rate
 
 #6 year masters ???
 
@@ -79,7 +80,7 @@ eras_phd = np.array([3, 5, net_years-8])
 
 contribution_phd = fc.contribution_over_time(salaries_phd, living_expenses_phd, additional_expenses_phd, eras_phd)
 rate_phd = np.zeros(net_years) # preallocation
-rate_phd[3:] = 0.04 # return on investments
+rate_phd[3:] = return_rate # return on investments
 
 
 # Function calls ---------------------------------------------------------------------
@@ -102,14 +103,6 @@ plt.xlabel('Age')
 plt.ylabel('Net Worth (Dollars)')
 plt.title('Net Worth')
 plt.legend(['Bachelors','Masters','Phd'])
-
-plt.figure(2)
-plt.plot(years_array, amount_masters - amount_phd, color='k')
-plt.xlabel('Years of Work')
-plt.ylabel('Difference in net worth')
-plt.grid(True)
-plt.title('Masters worth minus Ph.D worth')
-
 
 # End of program
 plt.show()
