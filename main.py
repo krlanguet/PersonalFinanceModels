@@ -1,12 +1,13 @@
-'''
+''' 
 TO DO still:
 
 techincal:
 
 
 account for:
+> Net worth
 > taxes on net worth
-> possible debt from masters program
+> possible debt from student loans program
 > yearly expenses
 > add rest of salary to net worth per year
 > changing interest rates and salary changes
@@ -15,6 +16,7 @@ account for:
 
 Tests to run:
 > Model what would happen during different macroeconomic environments
+>>> recession, good times, high inflation, etc.
 
 Question to answer:
 > For any point in the middle of my life, how long could I go without
@@ -46,6 +48,7 @@ return_rate = 0.04 # return on investments
 Salary data from BLS for 2016 https://www.bls.gov/ooh/computer-and-information-technology/home.htm
 B.S. -> $95,000 for relevant careers
 M.S. -> $110,000 for relecant careers
+
 Salary data from NSF https://www.nsf.gov/statistics/2017/nsf17306/static/report/nsf17306.pdf
 for 2015
 PhD. -> $120,000
@@ -72,7 +75,7 @@ contribution_m = fc.contribution_over_time(salaries_m, living_expenses_m, additi
 rate_m = np.zeros(net_years)
 rate_m[4:] = return_rate
 
-#6 year masters ???
+# 6 year masters -------------------------------------------------------------
 
 
 # PhD program -------------------------------------------------------------------
@@ -86,7 +89,7 @@ rate_phd = np.zeros(net_years) # preallocation
 rate_phd[3:] = return_rate # return on investments
 
 
-# Function calls ---------------------------------------------------------------------
+# Running Functions to get data ---------------------------------------------------------------------
 amount_bachelors = fc.total_investment_value(rate_b, initial_value, net_years, contribution_b)
 amount_masters = fc.total_investment_value(rate_m, initial_value, net_years, contribution_m)
 amount_phd = fc.total_investment_value(rate_phd, initial_value, net_years, contribution_phd)

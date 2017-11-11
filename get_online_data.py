@@ -32,7 +32,6 @@ def inflation_data(data_set='FRED/FPCPITOTLZGUSA', start_date='1992-1-1',
                                end_date=end_date, returns=return_type,
                                collapse=detail, authtoken=authtoken)
         
-        
         # formatting data from datatime to numerical values
         if detail == 'annualy':
             for i in range(len(inflation)):
@@ -50,7 +49,7 @@ def inflation_data(data_set='FRED/FPCPITOTLZGUSA', start_date='1992-1-1',
 # testing function
 inflation = inflation_data()
 print(inflation)
-    
+
     
 
     
