@@ -31,7 +31,7 @@ Question to answer:
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import style
-style.use('bmh')
+style.use('seaborn')
 
 # custom files
 import fin_comp as fc
