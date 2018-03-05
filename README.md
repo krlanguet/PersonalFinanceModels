@@ -3,10 +3,16 @@ Some simple tools by Ryan Zambrotta and Keith Languet for personal financial ana
 
 ## TODO
 - [ ] Internal data representation, informed from online research
+    - Research existing OOP classes available
 - [ ] Import functions for consuming gathered data
 
 ## Goals
 We aim to create models of our potential earnings, particularly so that Keith can determine how long he will have to work in industry in order to support his parents and brother.
+
+### Directives
+Since this project is targeted at analyzing two specific entities, the precise functions that I need will be determined by the questions that I am trying to answer about the business and family. The most important question to me right now is how much income can we expect the business to generate.
+
+We can start by determining how it has performed in the last year.
 
 ## Tools
 * We will create functions for importing data from Google sheets, in different formats.
